@@ -8,14 +8,14 @@
 }
 
 body {
-  background: url(../images/ed.gif) no-repeat;
+  background: url(/static/img/ed.gif) no-repeat;
   background-position: center;
   background-size: 100% 100%;
   background-attachment: fixed;
 }
 
 .side-bar {
-  background: rgba(255, 255, 255, 0.1);
+  opacity: 1;
   backdrop-filter: blur(15px);
   width: 290px;
   height: 100vh;
@@ -25,6 +25,8 @@ body {
   overflow-y: auto;
   transition: 0.6s ease;
   transition-property: left;
+  z-index: 100;
+  overflow: hidden;
 }
 
 .side-bar.active {
@@ -52,6 +54,7 @@ body {
 
 .side-bar .menu .item a:hover {
   background: #8621f8;
+  color: #fff;
   transition: 0.3s ease;
 }
 
@@ -77,8 +80,7 @@ body {
 
 .side-bar .menu .item .sub-menu img {
   padding-left: 30px;
-  height: 30px;
-  width: 60px;
+  max-width: 60px;
 }
 
 .rotate {
@@ -139,8 +141,6 @@ body {
     blink-caret .75s step-end infinite;
 }
 
-
-
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
@@ -157,4 +157,20 @@ body {
   size: 10%;
   font-size: 1.2vmax;
   width: 10%;
+}
+
+footer {
+  color: #fff;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: auto;
+  padding: 20px;
+  background;
+}
+
+footer p {
+  text-align: center;
 }

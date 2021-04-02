@@ -26,8 +26,8 @@
   </form>
   {% endif %}
   {% for category, message in get_flashed_messages(with_categories=true) %}
-  <div class="alert alert-{{ category if category != None else 'danger' }} mb-0 rounded-0">
-    <div class="container">
+  <div class="alert alert-{{ category if category != None else 'danger' }} mb-0">
+    <div>
       {{ message }}
     </div>
   </div>

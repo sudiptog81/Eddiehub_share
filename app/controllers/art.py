@@ -52,6 +52,7 @@ def index():
             user.photos.append(photo)
             db.session.add(photo)
             db.session.commit()
-            return render_template('art/index.html', uploaded=True)
+            photos = p.Photo.query.all()
+            return render_template('art/index.html', uploaded=True, photos=photos)
     photos = p.Photo.query.all()
     return render_template('art/index.html', photos=photos)

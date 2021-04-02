@@ -66,16 +66,26 @@ body
 	/*transition-delay: 0.5s;*/
 }
 
+body {
+  background-color: #343434;
+}
+
 .carousel {
+	backdrop-filter: blur(15px);
 }
 
 .carousel-item {
 	width: 100vw;
+	height: 100vh;
+}
+
+.slide-image {
+	height: 100vh;
 }
 
 .carousel-item img {
-	max-height: 100vh;
-	min-height: 100vh;
+	max-height: 100vh !important;
+	width: fit-content !important;
 	margin: auto !important;
 	/* max-width: fit-content; */
 }

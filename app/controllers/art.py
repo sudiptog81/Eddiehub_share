@@ -7,12 +7,12 @@ from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
 from app.models import photo as p, user as u
-from app.settings import UPLOAD_FOLDER, URL_PREFIX
-from app.extensions import db
+from app.settings import BUCKET_URL
+from app.extensions import db, s3
 
 blueprint = Blueprint('art', __name__, url_prefix='/art')
 
-ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
 def allowed_file(filename):
@@ -42,17 +42,22 @@ def index():
             ext = filename.rsplit('.', 1)[1].lower()
             id = str(uuid.uuid4())
             filename = f'{id}.{ext}'
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-            url = URL_PREFIX
-            url += url_for(
-                'uploaded_file',
-                filename=filename
-            )
-            photo = p.Photo(url, id=id)
-            user.photos.append(photo)
-            db.session.add(photo)
-            db.session.commit()
-            photos = p.Photo.query.all()
-            return render_template('art/index.html', uploaded=True, photos=photos)
+            try:
+                response = s3.upload_fileobj(
+                    file, 'eddiehub-share-images-bucket', filename,
+                    ExtraArgs={'ACL': 'public-read'}
+                )
+                url = BUCKET_URL + filename
+                photo = p.Photo(url, id=id)
+                user.photos.append(photo)
+                db.session.add(photo)
+                db.session.commit()
+                photos = p.Photo.query.all()
+                return redirect(request.url)
+            except Exception as e:
+                print(e)
+                flash('Error during upload', 'danger')
+                return redirect(request.url)
+
     photos = p.Photo.query.all()
     return render_template('art/index.html', photos=photos)

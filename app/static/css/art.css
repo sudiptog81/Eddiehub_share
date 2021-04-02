@@ -66,3 +66,34 @@ body
 	/*transition-delay: 0.5s;*/
 }
 
+.carousel {
+}
+
+.carousel-item {
+	width: 100vw;
+}
+
+.carousel-item img {
+	max-height: 100vh;
+	min-height: 100vh;
+	margin: auto !important;
+	/* max-width: fit-content; */
+}
+
+.header-form {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	margin: auto;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 100;
+}
+
+.menu-btn, .close-btn {
+	z-index: 1000;
+}
+

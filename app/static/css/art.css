@@ -85,7 +85,6 @@ body {
 
 .carousel-item img {
 	max-height: 100vh !important;
-	width: fit-content !important;
 	margin: auto !important;
 	/* max-width: fit-content; */
 }
